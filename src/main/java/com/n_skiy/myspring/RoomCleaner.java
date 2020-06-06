@@ -3,8 +3,8 @@ package com.n_skiy.myspring;
 
 public class RoomCleaner {
 
-    private Announcer announcer = new ConsoleAnnouncerImpl();
-    private CatSpookier catSpookier = new CatSpookierImpl();
+    private Announcer announcer = ObjectFactory.getInstance().createObject(Announcer.class);
+    private CatSpookier catSpookier = ObjectFactory.getInstance().createObject(CatSpookier.class);
 
     public void startCleaning(Room room) {
         announcer.announce("Preparing for cleaning");
