@@ -1,6 +1,6 @@
 # Idea
 .idea
-.iml
+*.iml
 
 # Maven
 /target
