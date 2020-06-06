@@ -1,4 +1,4 @@
-package com.n_skiy;
+package com.n_skiy.myspring;
 
 public interface CatSpookier {
 
