@@ -6,7 +6,7 @@ public class RoomCleaner {
     private Announcer announcer = new ConsoleAnnouncerImpl();
     private CatSpookier catSpookier = new CatSpookierImpl();
 
-    public void start(Room room) {
+    public void startCleaning(Room room) {
         announcer.announce("Preparing for cleaning");
         catSpookier.spookCats();
         clean(room);
