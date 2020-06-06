@@ -10,10 +10,10 @@ public class RoomCleaner {
         announcer.announce("Preparing for cleaning");
         catSpookier.spookCats();
         clean(room);
-        announcer.announce("Room " + room + " had being cleaned");
+        announcer.announce(room + " had being cleaned");
     }
 
     private void clean(Room room) {
-        System.out.println("Cleaning room: " + room + " - wshoh-wshoh-wshoh");
+        System.out.println("Cleaning " + room + ": wshoh-wshoh-wshoh");
     }
 }
