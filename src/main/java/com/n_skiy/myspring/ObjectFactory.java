@@ -4,6 +4,9 @@ public class ObjectFactory {
 
     private static ObjectFactory instance = new ObjectFactory();
 
+    private ObjectConfig objectConfig;
+
+
     public static ObjectFactory getInstance() {
         return instance;
     }
@@ -12,6 +15,15 @@ public class ObjectFactory {
     }
 
     public <T> T createObject(Class<T> type) {
-        return null;
+        Class<? extends T> implClass = type;
+        if(type.isInterface()) {
+            implClass = objectConfig.getImplClass(type);
+        }
+
+        try {
+            return implClass.newInstance();
+        } catch (InstantiationException | IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
