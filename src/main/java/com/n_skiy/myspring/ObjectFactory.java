@@ -1,10 +1,13 @@
 package com.n_skiy.myspring;
 
+import java.lang.reflect.InvocationTargetException;
+
+
 public class ObjectFactory {
 
     private static ObjectFactory instance = new ObjectFactory();
 
-    private ObjectConfig objectConfig;
+    private ObjectConfig objectConfig = new ObjectConfig("com.n_skiy.myspring");
 
 
     public static ObjectFactory getInstance() {
@@ -21,8 +24,8 @@ public class ObjectFactory {
         }
 
         try {
-            return implClass.newInstance();
-        } catch (InstantiationException | IllegalAccessException e) {
+            return implClass.getDeclaredConstructor().newInstance();
+        } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
             throw new RuntimeException(e);
         }
     }
