@@ -1,4 +1,4 @@
-package com.n_skiy.myspring;
+package com.n_skiy.myspring.example;
 
 public class ConsoleAnnouncerImpl implements Announcer {
 

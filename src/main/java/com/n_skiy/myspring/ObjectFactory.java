@@ -1,8 +1,10 @@
 package com.n_skiy.myspring;
 
+import com.n_skiy.myspring.example.CatSpookier;
+import com.n_skiy.myspring.example.SprinklerCatSpookierImpl;
+
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
-import java.util.Map;
 
 
 public class ObjectFactory {
@@ -20,7 +22,7 @@ public class ObjectFactory {
         HashMap<Class, Class> interface2ImplClass = new HashMap<>();
         interface2ImplClass.put(CatSpookier.class, SprinklerCatSpookierImpl.class);
 
-        objectConfig = new ObjectConfig("com.n_skiy.myspring", interface2ImplClass);
+        objectConfig = new ObjectConfig("com.n_skiy.myspring.example", interface2ImplClass);
     }
 
     public <T> T createObject(Class<T> type) {

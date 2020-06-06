@@ -1,4 +1,7 @@
-package com.n_skiy.myspring;
+package com.n_skiy.myspring.example;
+
+
+import com.n_skiy.myspring.ObjectFactory;
 
 
 public class RoomCleaner {
