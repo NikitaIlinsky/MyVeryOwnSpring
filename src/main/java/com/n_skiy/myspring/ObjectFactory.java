@@ -1,18 +1,13 @@
 package com.n_skiy.myspring;
 
 import com.n_skiy.myspring.example.CatSpookier;
-import com.n_skiy.myspring.example.InjectStuff;
 import com.n_skiy.myspring.example.SprinklerCatSpookierImpl;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
+import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Map;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import java.util.LinkedList;
+import java.util.List;
 
 
 public class ObjectFactory {
@@ -20,6 +15,7 @@ public class ObjectFactory {
     private static ObjectFactory instance = new ObjectFactory();
 
     private ObjectConfig objectConfig;
+    private List<ObjectConfigurator> configurators;
 
 
     public static ObjectFactory getInstance() {
@@ -31,6 +27,7 @@ public class ObjectFactory {
         interface2ImplClass.put(CatSpookier.class, SprinklerCatSpookierImpl.class);
 
         objectConfig = new ObjectConfig("com.n_skiy.myspring.example", interface2ImplClass);
+        configurators = Arrays.asList(new InjectPropertyAnnotationObjectConfigurator());
     }
 
     public <T> T createObject(Class<T> type) {
@@ -41,34 +38,12 @@ public class ObjectFactory {
 
         try {
             T t = implClass.getDeclaredConstructor().newInstance();
-
-            String path = ClassLoader.getSystemClassLoader().getResource("application.properties").getPath();
-            Stream<String> lines = new BufferedReader(new FileReader(path)).lines();
-            Map<String, String> propertiesMap = lines.map(line -> line.split("="))
-                    .collect(Collectors.toMap(arr -> arr[0], arr -> arr[1]));
-
-            for(Field field : implClass.getDeclaredFields()) {
-                InjectStuff annotation = field.getAnnotation(InjectStuff.class);
-
-
-                if(annotation != null) {
-                    String value;
-                    if(annotation.value().isEmpty()) {
-                        value = propertiesMap.get(field.getName());
-                    } else {
-                        value = propertiesMap.get(annotation.value());
-                    }
-
-                    boolean isAccessible = field.isAccessible();
-                    field.setAccessible(true);
-                    field.set(t, value);
-                    field.setAccessible(isAccessible);
-                }
+            for(ObjectConfigurator configurator : configurators) {
+                configurator.configure(t);
             }
 
             return t;
-        } catch (InstantiationException | IllegalAccessException | NoSuchMethodException |
-                 InvocationTargetException | FileNotFoundException e) {
+        } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
             throw new RuntimeException(e);
         }
     }
