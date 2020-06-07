@@ -4,9 +4,8 @@ import com.n_skiy.myspring.example.CatSpookier;
 import com.n_skiy.myspring.example.SprinklerCatSpookierImpl;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 
 
@@ -14,8 +13,8 @@ public class ObjectFactory {
 
     private static ObjectFactory instance = new ObjectFactory();
 
-    private ObjectConfig objectConfig;
-    private List<ObjectConfigurator> configurators;
+    private Config config;
+    private List<ObjectConfigurator> configurators = new ArrayList<>();
 
 
     public static ObjectFactory getInstance() {
@@ -26,25 +25,29 @@ public class ObjectFactory {
         HashMap<Class, Class> interface2ImplClass = new HashMap<>();
         interface2ImplClass.put(CatSpookier.class, SprinklerCatSpookierImpl.class);
 
-        objectConfig = new ObjectConfig("com.n_skiy.myspring.example", interface2ImplClass);
-        configurators = Arrays.asList(new InjectPropertyAnnotationObjectConfigurator());
+        config = new ObjectConfig("com.n_skiy.myspring", interface2ImplClass);
+        for (Class<? extends ObjectConfigurator> aClass : config.getScanner().getSubTypesOf(ObjectConfigurator.class)) {
+            configurators.add(instantiateObject(aClass));
+        }
     }
 
     public <T> T createObject(Class<T> type) {
         Class<? extends T> implClass = type;
-        if(type.isInterface()) {
-            implClass = objectConfig.getImplClass(type);
+        if (type.isInterface()) {
+            implClass = config.getImplClass(type);
         }
 
-        try {
-            T t = implClass.getDeclaredConstructor().newInstance();
-            for(ObjectConfigurator configurator : configurators) {
-                configurator.configure(t);
-            }
+        T t = instantiateObject(implClass);
+        configurators.forEach(conf -> conf.configure(t));
 
-            return t;
+        return t;
+    }
+
+    private <T> T instantiateObject(Class<? extends T> aClass) {
+        try {
+            return aClass.getDeclaredConstructor().newInstance();
         } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException();
         }
     }
 }

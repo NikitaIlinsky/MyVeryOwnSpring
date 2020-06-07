@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.Set;
 
 
-public class ObjectConfig {
+public class ObjectConfig implements Config {
 
     private Reflections scanner;
     private Map<Class, Class> interface2ImplClass;
@@ -16,6 +16,7 @@ public class ObjectConfig {
         this.scanner = new Reflections(packageToScan);
     }
 
+    @Override
     public <T> Class<? extends T> getImplClass(Class<T> interfaceType) {
         return interface2ImplClass.computeIfAbsent(interfaceType, aClass -> {
             Set<Class<? extends T>> classes = scanner.getSubTypesOf(interfaceType);
@@ -25,5 +26,10 @@ public class ObjectConfig {
 
             return classes.iterator().next();
         });
+    }
+
+    @Override
+    public Reflections getScanner() {
+        return scanner;
     }
 }
