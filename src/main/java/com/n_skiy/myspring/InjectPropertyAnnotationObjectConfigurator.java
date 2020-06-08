@@ -1,7 +1,5 @@
 package com.n_skiy.myspring;
 
-import com.n_skiy.myspring.example.InjectStuff;
-
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;

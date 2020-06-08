@@ -1,4 +1,4 @@
-package com.n_skiy.myspring.example;
+package com.n_skiy.myspring;
 
 
 import java.lang.annotation.Retention;
