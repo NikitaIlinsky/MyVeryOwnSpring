@@ -28,11 +28,11 @@ public class InjectPropertyAnnotationObjectConfigurator implements ObjectConfigu
     public void configure(Object t) {
         Class<?> implClass = t.getClass();
 
-        for(Field field : implClass.getDeclaredFields()) {
+        for (Field field : implClass.getDeclaredFields()) {
             InjectStuff annotation = field.getAnnotation(InjectStuff.class);
-            if(annotation != null) {
+            if (annotation != null) {
                 String value;
-                if(annotation.value().isEmpty()) {
+                if (annotation.value().isEmpty()) {
                     value = propertiesMap.get(field.getName());
                 } else {
                     value = propertiesMap.get(annotation.value());

@@ -1,8 +1,4 @@
-package com.n_skiy.myspring;
-
-import com.n_skiy.myspring.example.Room;
-import com.n_skiy.myspring.example.RoomCleaner;
-
+package com.n_skiy.myspring.example;
 
 public class Main {
 

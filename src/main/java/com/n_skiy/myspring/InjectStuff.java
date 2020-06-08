@@ -7,5 +7,6 @@ import java.lang.annotation.RetentionPolicy;
 
 @Retention(RetentionPolicy.RUNTIME)
 public @interface InjectStuff {
+
     String value() default "";
 }
