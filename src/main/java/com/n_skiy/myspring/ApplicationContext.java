@@ -1,5 +1,7 @@
 package com.n_skiy.myspring;
 
+import com.n_skiy.myspring.annotation.SingletonStuff;
+
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 

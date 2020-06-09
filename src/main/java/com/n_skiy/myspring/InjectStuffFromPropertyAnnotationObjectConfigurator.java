@@ -1,5 +1,7 @@
 package com.n_skiy.myspring;
 
+import com.n_skiy.myspring.annotation.InjectStuffFromProperty;
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -9,11 +11,11 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 
-public class InjectPropertyAnnotationObjectConfigurator implements ObjectConfigurator {
+public class InjectStuffFromPropertyAnnotationObjectConfigurator implements ObjectConfigurator {
 
     private Map<String, String> propertiesMap;
 
-    InjectPropertyAnnotationObjectConfigurator() {
+    InjectStuffFromPropertyAnnotationObjectConfigurator() {
         try {
             String path = ClassLoader.getSystemClassLoader().getResource("application.properties").getPath();
             Stream<String> lines = new BufferedReader(new FileReader(path)).lines();
@@ -29,7 +31,7 @@ public class InjectPropertyAnnotationObjectConfigurator implements ObjectConfigu
         Class<?> implClass = t.getClass();
 
         for (Field field : implClass.getDeclaredFields()) {
-            InjectStuff annotation = field.getAnnotation(InjectStuff.class);
+            InjectStuffFromProperty annotation = field.getAnnotation(InjectStuffFromProperty.class);
             if (annotation != null) {
                 String value;
                 if (annotation.value().isEmpty()) {

@@ -1,16 +1,16 @@
 package com.n_skiy.example;
 
-import com.n_skiy.myspring.InjectStuff;
-import com.n_skiy.myspring.SingletonStuff;
+import com.n_skiy.myspring.annotation.InjectStuffFromProperty;
+import com.n_skiy.myspring.annotation.SingletonStuff;
 
 
 @SingletonStuff
 public class ThroatCleanerImpl implements ThroatCleaner {
 
-    @InjectStuff                 // Inject from application.property by field name
+    @InjectStuffFromProperty                 // Inject from application.property by field name
     private String coughType1;
 
-    @InjectStuff("coughType2")   // Inject from application.property by property
+    @InjectStuffFromProperty("coughType2")   // Inject from application.property by property
     private String coughEnding;
 
     @Override

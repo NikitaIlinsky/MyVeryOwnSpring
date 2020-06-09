@@ -1,6 +1,6 @@
 package com.n_skiy.example;
 
-import com.n_skiy.myspring.InjectStuffByType;
+import com.n_skiy.myspring.annotation.InjectStuffByType;
 
 
 public class ConsoleAnnouncerImpl implements Announcer {

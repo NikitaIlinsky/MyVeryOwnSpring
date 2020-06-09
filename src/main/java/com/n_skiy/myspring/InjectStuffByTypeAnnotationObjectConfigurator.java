@@ -1,5 +1,9 @@
 package com.n_skiy.myspring;
 
+import com.n_skiy.myspring.ApplicationContext;
+import com.n_skiy.myspring.ObjectConfigurator;
+import com.n_skiy.myspring.annotation.InjectStuffByType;
+
 import java.lang.reflect.Field;
 
 
