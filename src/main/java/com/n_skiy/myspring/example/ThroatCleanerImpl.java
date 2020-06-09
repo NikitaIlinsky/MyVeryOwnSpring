@@ -1,8 +1,10 @@
 package com.n_skiy.myspring.example;
 
 import com.n_skiy.myspring.InjectStuff;
+import com.n_skiy.myspring.SingletonStuff;
 
 
+@SingletonStuff
 public class ThroatCleanerImpl implements ThroatCleaner {
 
     @InjectStuff                 // Inject from application.property by field name
