@@ -1,4 +1,4 @@
-package com.n_skiy.myspring.example;
+package com.n_skiy.example;
 
 
 import com.n_skiy.myspring.InjectStuffByType;

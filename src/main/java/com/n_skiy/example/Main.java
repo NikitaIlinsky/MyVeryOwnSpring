@@ -1,4 +1,4 @@
-package com.n_skiy.myspring.example;
+package com.n_skiy.example;
 
 import com.n_skiy.myspring.Application;
 import com.n_skiy.myspring.ApplicationContext;
