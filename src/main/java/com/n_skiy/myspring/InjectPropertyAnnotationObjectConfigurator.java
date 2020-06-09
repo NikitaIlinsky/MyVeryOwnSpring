@@ -13,7 +13,7 @@ public class InjectPropertyAnnotationObjectConfigurator implements ObjectConfigu
 
     private Map<String, String> propertiesMap;
 
-    public InjectPropertyAnnotationObjectConfigurator() {
+    InjectPropertyAnnotationObjectConfigurator() {
         try {
             String path = ClassLoader.getSystemClassLoader().getResource("application.properties").getPath();
             Stream<String> lines = new BufferedReader(new FileReader(path)).lines();

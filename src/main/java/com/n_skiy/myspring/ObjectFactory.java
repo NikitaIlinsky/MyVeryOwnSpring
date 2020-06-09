@@ -5,20 +5,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class ObjectFactory {
+class ObjectFactory {
 
     private ApplicationContext context;
 
     private List<ObjectConfigurator> configurators = new ArrayList<>();
 
-    public ObjectFactory(ApplicationContext context) {
+    ObjectFactory(ApplicationContext context) {
         this.context = context;
         for (Class<? extends ObjectConfigurator> aClass : this.context.getConfig().getScanner().getSubTypesOf(ObjectConfigurator.class)) {
             configurators.add(instantiateObject(aClass));
         }
     }
 
-    public <T> T createObject(Class<T> type) {
+    <T> T createObject(Class<T> type) {
         T t = instantiateObject(type);
         configurators.forEach(conf -> conf.configure(t, context));
         return t;

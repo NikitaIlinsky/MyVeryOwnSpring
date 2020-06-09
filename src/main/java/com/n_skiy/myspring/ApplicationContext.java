@@ -11,15 +11,15 @@ public class ApplicationContext {
     private Map<Class, Object> cache = new ConcurrentHashMap<>();
     private Config config;
 
-    public ApplicationContext(Config config) {
+    ApplicationContext(Config config) {
         this.config = config;
     }
 
-    public void setObjectFactory(ObjectFactory objectFactory) {
+    void setObjectFactory(ObjectFactory objectFactory) {
         this.objectFactory = objectFactory;
     }
 
-    public Config getConfig() {
+    Config getConfig() {
         return config;
     }
 

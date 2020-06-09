@@ -11,9 +11,9 @@ public class ObjectConfig implements Config {
     private Reflections scanner;
     private Map<Class, Class> interface2ImplClass;
 
-    public ObjectConfig(String packageToScan, Map<Class, Class> interface2ImplClass) {
+    ObjectConfig(Set<String> packagesToScan, Map<Class, Class> interface2ImplClass) {
         this.interface2ImplClass = interface2ImplClass;
-        this.scanner = new Reflections(packageToScan);
+        this.scanner = new Reflections(packagesToScan.toArray());
     }
 
     @Override

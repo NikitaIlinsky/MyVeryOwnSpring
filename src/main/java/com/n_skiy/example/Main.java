@@ -10,7 +10,7 @@ import java.util.Map;
 public class Main {
 
     public static void main(String[] args) {
-        ApplicationContext context = Application.run("com.n_skiy.myspring", getInterfaceToImplMap());
+        ApplicationContext context = Application.run("com.n_skiy.example", getInterfaceToImplMap());
 
         RoomCleaner roomCleaner = context.getObject(RoomCleaner.class);
         Room room = new Room();
