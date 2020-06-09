@@ -1,9 +1,5 @@
 package com.n_skiy.myspring;
 
-import com.n_skiy.myspring.example.CatSpookier;
-import com.n_skiy.myspring.example.SprinklerCatSpookierImpl;
-
-import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -11,16 +7,16 @@ import java.util.concurrent.ConcurrentHashMap;
 public class ApplicationContext {
 
     private ObjectFactory objectFactory;
-    private Map<Class, Object> cache = new ConcurrentHashMap<>();
 
+    private Map<Class, Object> cache = new ConcurrentHashMap<>();
     private Config config;
 
-    public ApplicationContext() {
-        HashMap<Class, Class> interface2ImplClass = new HashMap<>();
-        interface2ImplClass.put(CatSpookier.class, SprinklerCatSpookierImpl.class);
-        config = new ObjectConfig("com.n_skiy.myspring", interface2ImplClass);
+    public ApplicationContext(Config config) {
+        this.config = config;
+    }
 
-        objectFactory = new ObjectFactory(this);
+    public void setObjectFactory(ObjectFactory objectFactory) {
+        this.objectFactory = objectFactory;
     }
 
     public Config getConfig() {
