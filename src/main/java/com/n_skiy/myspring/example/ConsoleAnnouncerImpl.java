@@ -1,11 +1,12 @@
 package com.n_skiy.myspring.example;
 
-import com.n_skiy.myspring.ObjectFactory;
+import com.n_skiy.myspring.InjectStuffByType;
 
 
 public class ConsoleAnnouncerImpl implements Announcer {
 
-    private ThroatCleaner throatCleaner = ObjectFactory.getInstance().createObject(ThroatCleaner.class);
+    @InjectStuffByType
+    private ThroatCleaner throatCleaner;
 
     @Override
     public void announce(String announce) {
