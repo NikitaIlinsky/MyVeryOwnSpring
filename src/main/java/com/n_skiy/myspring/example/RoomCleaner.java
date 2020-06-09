@@ -1,13 +1,16 @@
 package com.n_skiy.myspring.example;
 
 
-import com.n_skiy.myspring.ObjectFactory;
+import com.n_skiy.myspring.InjectStuffByType;
 
 
 public class RoomCleaner {
 
-    private Announcer announcer = ObjectFactory.getInstance().createObject(Announcer.class);
-    private CatSpookier catSpookier = ObjectFactory.getInstance().createObject(CatSpookier.class);
+    @InjectStuffByType
+    private Announcer announcer;
+
+    @InjectStuffByType
+    private CatSpookier catSpookier;
 
     public void startCleaning(Room room) {
         announcer.announce("Preparing for cleaning");
